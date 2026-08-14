@@ -1,0 +1,17 @@
+:root {
+    --bg-color: #FAFAFA;
+    --navy: #1F2A5E;
+    --card-bg: #FFFFFF;
+
+    --primary: #F9606B;
+    --secondary: #F9C74F;
+
+    --border: #E7E7EA;
+
+    --text-primary: #1F2937;
+    --text-secondary: #6B7280;
+
+    --success: #22C55E;
+    --error: #EF4444;
+    --warning: #F59E0B;
+}
