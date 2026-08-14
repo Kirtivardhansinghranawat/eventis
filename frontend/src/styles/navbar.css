@@ -1,0 +1,53 @@
+.navbar {
+    width: 100%;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-logo {
+    text-decoration: none;
+    color: var(--navy);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+.navbar-links a:hover {
+    color: var(--primary);
+}
+
+.navbar-register {
+    background-color: var(--primary);
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+.navbar-register:hover {
+    opacity: 0.9;
+}
