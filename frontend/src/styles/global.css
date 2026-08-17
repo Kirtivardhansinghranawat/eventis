@@ -1,6 +1,7 @@
 @import "./variables.css";
 @import "./navbar.css";
 @import "./home.css";
+@import "./events.css";
 
 * {
     margin: 0;
