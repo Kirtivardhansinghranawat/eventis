@@ -47,6 +47,14 @@ export const getEventById = async (id) => {
     return handleResponse(response);
 };
 
+export const getEventSeats = async (eventId) => {
+    const response = await fetch(
+        `${API_URL}/${eventId}/seats`
+    );
+
+    return handleResponse(response);
+};
+
 export const createEvent = async (eventData) => {
     const response = await fetch(API_URL, {
         method: "POST",
