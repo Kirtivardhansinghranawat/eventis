@@ -41,11 +41,7 @@ public class EventService {
         event.setCategory(request.getCategory());
         event.setPrice(request.getPrice());
         event.setTotalSeats(request.getTotalSeats());
-
-        // Initially all seats are available
         event.setAvailableSeats(request.getTotalSeats());
-
-        // Organiser comes from authenticated user
         event.setOrganiserId(organiserId);
 
         return eventRepository.save(event);
@@ -56,7 +52,6 @@ public class EventService {
     }
 
     public Event getEventById(String id) {
-
         return eventRepository.findById(id)
                 .orElseThrow(() ->
                         new RuntimeException("Event not found"));
@@ -74,7 +69,6 @@ public class EventService {
 
         Event event = getEventById(id);
 
-        // Only the organiser who created the event can update it
         if (!event.getOrganiserId().equals(organiserId)) {
             throw new RuntimeException(
                     "You are not authorized to update this event"
@@ -109,10 +103,6 @@ public class EventService {
         event.setCategory(request.getCategory());
         event.setPrice(request.getPrice());
 
-        /*
-         * Preserve already booked seats when the organiser
-         * changes the total capacity.
-         */
         int bookedSeats =
                 event.getTotalSeats() - event.getAvailableSeats();
 
@@ -137,7 +127,6 @@ public class EventService {
 
         Event event = getEventById(id);
 
-        // Only the organiser who created the event can delete it
         if (!event.getOrganiserId().equals(organiserId)) {
             throw new RuntimeException(
                     "You are not authorized to delete this event"

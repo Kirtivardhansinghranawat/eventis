@@ -1,53 +1,268 @@
+/* ========================================
+   EVENTIS NAVBAR
+======================================== */
+
 .navbar {
     width: 100%;
-    background-color: var(--card-bg);
-    border-bottom: 1px solid var(--border);
+
+    background: var(--color-white);
+
+    border-bottom: 1px solid var(--color-border);
+
     position: sticky;
     top: 0;
+
     z-index: 1000;
 }
 
+
+/* ========================================
+   NAVBAR CONTAINER
+======================================== */
+
 .navbar-container {
+    width: 100%;
     max-width: 1200px;
+
+    min-height: 72px;
+
     margin: 0 auto;
-    padding: 18px 24px;
+    padding: 0 24px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
+
+/* ========================================
+   LOGO
+======================================== */
+
 .navbar-logo {
-    text-decoration: none;
-    color: var(--navy);
-    font-size: 22px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    color: var(--color-navy);
+
+    font-size: 24px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    transition: color var(--transition-normal);
 }
+
+
+.navbar-logo span {
+    color: var(--color-coral);
+}
+
+
+.navbar-logo:hover {
+    color: var(--color-coral);
+}
+
+
+/* ========================================
+   NAVIGATION LINKS
+======================================== */
 
 .navbar-links {
     display: flex;
+
     align-items: center;
-    gap: 28px;
+
+    gap: 24px;
 }
+
 
 .navbar-links a {
-    text-decoration: none;
-    color: var(--text-primary);
-    font-size: 15px;
+    position: relative;
+
+    color: var(--color-text);
+
+    font-size: var(--font-size-md);
+    font-weight: 600;
+
+    transition: color var(--transition-normal);
 }
+
 
 .navbar-links a:hover {
-    color: var(--primary);
+    color: var(--color-coral);
 }
+
+
+/* ========================================
+   ACTIVE-LIKE UNDERLINE
+======================================== */
+
+.navbar-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -7px;
+
+    width: 0;
+    height: 2px;
+
+    border-radius: var(--radius-pill);
+
+    background: var(--color-coral);
+
+    transition: width var(--transition-normal);
+}
+
+
+.navbar-links a:hover::after {
+    width: 100%;
+}
+
+
+/* ========================================
+   USER GREETING
+======================================== */
+
+.navbar-user {
+    color: var(--color-text-muted);
+
+    font-size: var(--font-size-md);
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   REGISTER BUTTON
+======================================== */
 
 .navbar-register {
-    background-color: var(--primary);
-    color: white !important;
-    padding: 10px 18px;
-    border-radius: 8px;
+    padding: 9px 17px;
+
+    border-radius: var(--radius-md);
+
+    background: var(--color-coral);
+
+    color: var(--color-white) !important;
+
+    font-weight: 700 !important;
+
+    transition:
+        background var(--transition-normal),
+        transform var(--transition-fast),
+        box-shadow var(--transition-normal);
 }
 
+
+.navbar-register::after {
+    display: none;
+}
+
+
 .navbar-register:hover {
-    opacity: 0.9;
+    background: #e84f5a;
+
+    color: var(--color-white) !important;
+
+    transform: translateY(-1px);
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+/* ========================================
+   LOGOUT BUTTON
+======================================== */
+
+.navbar-logout {
+    padding: 9px 17px;
+
+    border: 1px solid var(--color-border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--color-white);
+
+    color: var(--color-navy);
+
+    font-family: inherit;
+
+    font-size: var(--font-size-md);
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background var(--transition-normal),
+        border-color var(--transition-normal),
+        color var(--transition-normal);
+}
+
+
+.navbar-logout:hover {
+    border-color: var(--color-coral);
+
+    background: rgba(249, 96, 107, 0.08);
+
+    color: var(--color-coral);
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .navbar-container {
+        min-height: auto;
+
+        padding: 16px 20px;
+
+        flex-direction: column;
+
+        gap: 16px;
+    }
+
+
+    .navbar-links {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 14px 18px;
+    }
+
+
+    .navbar-user {
+        width: 100%;
+
+        text-align: center;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .navbar-logo {
+        font-size: 22px;
+    }
+
+
+    .navbar-links {
+        gap: 12px;
+    }
+
+
+    .navbar-links a,
+    .navbar-user,
+    .navbar-logout,
+    .navbar-register {
+        font-size: var(--font-size-sm);
+    }
+
 }

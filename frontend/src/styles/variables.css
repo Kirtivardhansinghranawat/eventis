@@ -1,17 +1,82 @@
 :root {
-    --bg-color: #FAFAFA;
-    --navy: #1F2A5E;
-    --card-bg: #FFFFFF;
+    /* ========================================
+       EVENTIS COLOR PALETTE
+    ======================================== */
 
-    --primary: #F9606B;
-    --secondary: #F9C74F;
+    --color-background: #FAFAFA;
+    --color-navy: #1F2A5E;
+    --color-white: #FFFFFF;
 
-    --border: #E7E7EA;
+    --color-coral: #F9606B;
+    --color-gold: #F9C74F;
 
-    --text-primary: #1F2937;
-    --text-secondary: #6B7280;
+    --color-border: #E7E7EA;
 
-    --success: #22C55E;
-    --error: #EF4444;
-    --warning: #F59E0B;
+    --color-text: #1F2937;
+    --color-text-muted: #6B7280;
+
+    --color-success: #22C55E;
+    --color-error: #EF4444;
+    --color-warning: #F59E0B;
+
+
+    /* ========================================
+       EVENTIS TYPOGRAPHY
+    ======================================== */
+
+    --font-family: Calibri, Arial, sans-serif;
+
+    --font-size-xs: 8px;
+    --font-size-sm: 12px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 28px;
+    --font-size-3xl: 38px;
+
+
+    /* ========================================
+       EVENTIS SPACING
+    ======================================== */
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+
+
+    /* ========================================
+       EVENTIS BORDER RADIUS
+    ======================================== */
+
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-xl: 20px;
+    --radius-pill: 999px;
+
+
+    /* ========================================
+       EVENTIS SHADOWS
+    ======================================== */
+
+    --shadow-sm: 0 2px 8px rgba(31, 42, 94, 0.06);
+
+    --shadow-md: 0 6px 20px rgba(31, 42, 94, 0.08);
+
+    --shadow-lg: 0 12px 35px rgba(31, 42, 94, 0.12);
+
+
+    /* ========================================
+       EVENTIS TRANSITIONS
+    ======================================== */
+
+    --transition-fast: 0.15s ease;
+
+    --transition-normal: 0.25s ease;
+
+    --transition-slow: 0.35s ease;
 }

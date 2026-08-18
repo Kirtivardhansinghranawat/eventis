@@ -7,6 +7,9 @@ import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Events from "./pages/Events"
 import EventDetails from "./pages/EventDetails";
+import OrganiserDashboard from "./pages/OrganiserDashboard";
+import CreateEvent from "./pages/CreateEvent";
+import EditEvent from "./pages/EditEvent";
 
 function App(){
   return(
@@ -26,6 +29,17 @@ function App(){
     <Route path="/login" element={<Login />} />
 
     <Route path="/register" element={<Register />} />
+
+    <Route
+    path="/organiser/dashboard"
+    element={<OrganiserDashboard />}/>
+    <Route
+    path="/organiser/events/create"
+    element={<CreateEvent />}/>
+
+    <Route
+    path="/organiser/events/edit/:id"
+    element={<EditEvent />}/>
 
     </Routes>
       <Footer />

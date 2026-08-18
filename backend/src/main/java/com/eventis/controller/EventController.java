@@ -21,7 +21,6 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    // Public - anyone can view all events
     @GetMapping
     public ResponseEntity<List<Event>> getAllEvents() {
         return ResponseEntity.ok(
@@ -29,7 +28,6 @@ public class EventController {
         );
     }
 
-    // Public - anyone can view event details
     @GetMapping("/{id}")
     public ResponseEntity<Event> getEventById(
             @PathVariable String id
@@ -39,7 +37,6 @@ public class EventController {
         );
     }
 
-    // Protected - organiser only
     @PostMapping
     public ResponseEntity<Event> createEvent(
             @RequestBody EventRequest request,
@@ -59,7 +56,6 @@ public class EventController {
                 .body(event);
     }
 
-    // Protected - organiser only
     @PutMapping("/{id}")
     public ResponseEntity<Event> updateEvent(
             @PathVariable String id,
@@ -79,7 +75,6 @@ public class EventController {
         return ResponseEntity.ok(event);
     }
 
-    // Protected - organiser only
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEvent(
             @PathVariable String id,
@@ -99,7 +94,6 @@ public class EventController {
         );
     }
 
-    // Protected - organiser can see their own events
     @GetMapping("/organiser/my-events")
     public ResponseEntity<List<Event>> getMyEvents(
             Authentication authentication
