@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "../styles/navbar.css";
 
@@ -6,6 +6,14 @@ function Navbar() {
     const { user, logout, isAuthenticated } = useAuth();
 
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const attendeeDashboard = "/attendee/dashboard";
+    const organiserDashboard = "/organiser/dashboard";
+
+    const isDashboardPage =
+        location.pathname === attendeeDashboard ||
+        location.pathname === organiserDashboard;
 
     const handleLogout = () => {
         logout();
@@ -17,7 +25,6 @@ function Navbar() {
 
             <div className="navbar-container">
 
-                {/* Logo */}
                 <Link
                     to="/"
                     className="navbar-logo"
@@ -25,38 +32,42 @@ function Navbar() {
                     EVENT<span>IS</span>
                 </Link>
 
-                {/* Navigation */}
                 <div className="navbar-links">
 
-                    <Link to="/">
-                        Home
-                    </Link>
+                    {location.pathname !== "/" && (
+                        <Link to="/">
+                            Home
+                        </Link>
+                    )}
 
-                    <Link to="/events">
-                        Events
-                    </Link>
+                    {location.pathname !== "/events" && (
+                        <Link to="/events">
+                            Events
+                        </Link>
+                    )}
 
                     {isAuthenticated ? (
                         <>
-                            {/* Dashboard based on role */}
-                            {user?.role === "ATTENDEE" && (
-                                <Link to="/attendee/dashboard">
-                                    Dashboard
-                                </Link>
+                            {!isDashboardPage && (
+                                <>
+                                    {user?.role === "ATTENDEE" && (
+                                        <Link to={attendeeDashboard}>
+                                            Dashboard
+                                        </Link>
+                                    )}
+
+                                    {user?.role === "ORGANISER" && (
+                                        <Link to={organiserDashboard}>
+                                            Dashboard
+                                        </Link>
+                                    )}
+                                </>
                             )}
 
-                            {user?.role === "ORGANISER" && (
-                                <Link to="/organiser/dashboard">
-                                    Dashboard
-                                </Link>
-                            )}
-
-                            {/* User name */}
                             <span className="navbar-user">
                                 Hi, {user?.name}
                             </span>
 
-                            {/* Logout */}
                             <button
                                 type="button"
                                 className="navbar-logout"
@@ -67,16 +78,20 @@ function Navbar() {
                         </>
                     ) : (
                         <>
-                            <Link to="/login">
-                                Login
-                            </Link>
+                            {location.pathname !== "/login" && (
+                                <Link to="/login">
+                                    Login
+                                </Link>
+                            )}
 
-                            <Link
-                                to="/register"
-                                className="navbar-register"
-                            >
-                                Register
-                            </Link>
+                            {location.pathname !== "/register" && (
+                                <Link
+                                    to="/register"
+                                    className="navbar-register"
+                                >
+                                    Register
+                                </Link>
+                            )}
                         </>
                     )}
 

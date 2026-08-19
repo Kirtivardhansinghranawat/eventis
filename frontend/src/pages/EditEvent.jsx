@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
     getEventById,
+    getEventSeats,
     updateEvent
 } from "../services/eventService";
 import "../styles/edit-event.css";
@@ -21,6 +22,12 @@ function EditEvent() {
         totalSeats: ""
     });
 
+    const [seatStats, setSeatStats] = useState({
+        available: 0,
+        locked: 0,
+        booked: 0
+    });
+
     const [errors, setErrors] = useState({});
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -28,7 +35,13 @@ function EditEvent() {
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const event = await getEventById(id);
+                setLoading(true);
+                setErrors({});
+
+                const [event, seatData] = await Promise.all([
+                    getEventById(id),
+                    getEventSeats(id)
+                ]);
 
                 setFormData({
                     title: event.title || "",
@@ -40,9 +53,33 @@ function EditEvent() {
                     price: event.price ?? "",
                     totalSeats: event.totalSeats ?? ""
                 });
+
+                const seats =
+                    Array.isArray(seatData)
+                        ? seatData
+                        : [];
+
+                setSeatStats({
+                    available: seats.filter(
+                        (seat) =>
+                            seat.status === "AVAILABLE"
+                    ).length,
+
+                    locked: seats.filter(
+                        (seat) =>
+                            seat.status === "LOCKED"
+                    ).length,
+
+                    booked: seats.filter(
+                        (seat) =>
+                            seat.status === "BOOKED"
+                    ).length
+                });
             } catch (error) {
                 setErrors({
-                    form: error.message
+                    form:
+                        error.message ||
+                        "Unable to load event."
                 });
             } finally {
                 setLoading(false);
@@ -71,8 +108,11 @@ function EditEvent() {
         const newErrors = {};
 
         if (!formData.title.trim()) {
-            newErrors.title = "Event title is required.";
-        } else if (formData.title.trim().length < 3) {
+            newErrors.title =
+                "Event title is required.";
+        } else if (
+            formData.title.trim().length < 3
+        ) {
             newErrors.title =
                 "Event title must contain at least 3 characters.";
         }
@@ -80,17 +120,21 @@ function EditEvent() {
         if (!formData.description.trim()) {
             newErrors.description =
                 "Event description is required.";
-        } else if (formData.description.trim().length < 10) {
+        } else if (
+            formData.description.trim().length < 10
+        ) {
             newErrors.description =
                 "Description must contain at least 10 characters.";
         }
 
         if (!formData.date) {
-            newErrors.date = "Event date is required.";
+            newErrors.date =
+                "Event date is required.";
         }
 
         if (!formData.time) {
-            newErrors.time = "Event time is required.";
+            newErrors.time =
+                "Event time is required.";
         }
 
         if (formData.date && formData.time) {
@@ -99,10 +143,15 @@ function EditEvent() {
             );
 
             if (
-                Number.isNaN(eventDateTime.getTime())
+                Number.isNaN(
+                    eventDateTime.getTime()
+                )
             ) {
-                newErrors.date = "Please enter a valid date.";
-                newErrors.time = "Please enter a valid time.";
+                newErrors.date =
+                    "Please enter a valid date.";
+
+                newErrors.time =
+                    "Please enter a valid time.";
             }
         }
 
@@ -127,10 +176,20 @@ function EditEvent() {
         if (
             formData.totalSeats === "" ||
             Number(formData.totalSeats) <= 0 ||
-            !Number.isInteger(Number(formData.totalSeats))
+            !Number.isInteger(
+                Number(formData.totalSeats)
+            )
         ) {
             newErrors.totalSeats =
                 "Total seats must be a positive whole number.";
+        }
+
+        if (
+            Number(formData.totalSeats) <
+            seatStats.booked
+        ) {
+            newErrors.totalSeats =
+                `Total seats cannot be less than ${seatStats.booked} already booked seat(s).`;
         }
 
         return newErrors;
@@ -141,9 +200,13 @@ function EditEvent() {
 
         setErrors({});
 
-        const validationErrors = validateForm();
+        const validationErrors =
+            validateForm();
 
-        if (Object.keys(validationErrors).length > 0) {
+        if (
+            Object.keys(validationErrors)
+                .length > 0
+        ) {
             setErrors(validationErrors);
             return;
         }
@@ -153,19 +216,26 @@ function EditEvent() {
 
             await updateEvent(id, {
                 title: formData.title.trim(),
-                description: formData.description.trim(),
+                description:
+                    formData.description.trim(),
                 date: formData.date,
                 time: formData.time,
-                location: formData.location.trim(),
+                location:
+                    formData.location.trim(),
                 category: formData.category,
                 price: Number(formData.price),
-                totalSeats: Number(formData.totalSeats)
+                totalSeats:
+                    Number(formData.totalSeats)
             });
 
-            navigate("/organiser/dashboard");
+            navigate(
+                "/organiser/dashboard"
+            );
         } catch (error) {
             setErrors({
-                form: error.message
+                form:
+                    error.message ||
+                    "Unable to update event."
             });
         } finally {
             setSaving(false);
@@ -186,7 +256,6 @@ function EditEvent() {
         <main className="edit-event-page">
 
             <section className="edit-event-header">
-
                 <div>
                     <p className="edit-event-label">
                         ORGANISER
@@ -197,11 +266,10 @@ function EditEvent() {
                     </h1>
 
                     <p>
-                        Update your event information, schedule,
-                        pricing, and capacity.
+                        Update your event information,
+                        schedule, pricing, and capacity.
                     </p>
                 </div>
-
             </section>
 
             <section className="edit-event-card">
@@ -219,8 +287,8 @@ function EditEvent() {
                             </h2>
 
                             <p>
-                                Update the basic information attendees
-                                will see.
+                                Update the basic information
+                                attendees will see.
                             </p>
                         </div>
 
@@ -256,7 +324,9 @@ function EditEvent() {
                                 id="description"
                                 name="description"
                                 rows="5"
-                                value={formData.description}
+                                value={
+                                    formData.description
+                                }
                                 onChange={handleChange}
                             />
 
@@ -331,8 +401,8 @@ function EditEvent() {
                             </h2>
 
                             <p>
-                                Update when and where your event
-                                will take place.
+                                Update when and where your
+                                event will take place.
                             </p>
                         </div>
 
@@ -416,7 +486,8 @@ function EditEvent() {
                             </h2>
 
                             <p>
-                                Update ticket pricing and total capacity.
+                                Update ticket pricing and
+                                total capacity.
                             </p>
                         </div>
 
@@ -462,7 +533,9 @@ function EditEvent() {
                                     type="number"
                                     min="1"
                                     step="1"
-                                    value={formData.totalSeats}
+                                    value={
+                                        formData.totalSeats
+                                    }
                                     onChange={handleChange}
                                 />
 
@@ -472,6 +545,40 @@ function EditEvent() {
                                     </span>
                                 )}
 
+                            </div>
+
+                        </div>
+
+                        <div className="edit-seat-stats">
+
+                            <div className="edit-seat-stat">
+                                <span className="edit-seat-stat-label">
+                                    Available
+                                </span>
+
+                                <strong>
+                                    {seatStats.available}
+                                </strong>
+                            </div>
+
+                            <div className="edit-seat-stat">
+                                <span className="edit-seat-stat-label">
+                                    Locked
+                                </span>
+
+                                <strong>
+                                    {seatStats.locked}
+                                </strong>
+                            </div>
+
+                            <div className="edit-seat-stat">
+                                <span className="edit-seat-stat-label">
+                                    Booked
+                                </span>
+
+                                <strong>
+                                    {seatStats.booked}
+                                </strong>
                             </div>
 
                         </div>
@@ -490,7 +597,9 @@ function EditEvent() {
                             type="button"
                             className="edit-event-cancel"
                             onClick={() =>
-                                navigate("/organiser/dashboard")
+                                navigate(
+                                    "/organiser/dashboard"
+                                )
                             }
                         >
                             Cancel

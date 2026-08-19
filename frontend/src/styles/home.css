@@ -1,373 +1,396 @@
-/* ========================================
-   EVENTIS HOME
-======================================== */
-
 .home-page {
-    min-height: 100vh;
-
-    background: var(--color-background);
+    background: #EAE7F2;
+    color: #172D61;
 }
 
+/* HERO */
 
-/* ========================================
-   HERO
-======================================== */
+.home-hero {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
 
-.hero {
-    min-height: 560px;
+    padding: 75px 0 70px;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
     align-items: center;
-    justify-content: center;
 
-    padding: 80px 24px;
-
-    background: var(--color-background);
+    gap: 65px;
 }
 
-
-.hero-content {
-    width: 100%;
-    max-width: 900px;
-
-    text-align: center;
+.home-hero-content {
+    max-width: 560px;
 }
 
+.home-eyebrow {
+    margin: 0 0 18px;
 
-/* ========================================
-   HERO LABEL
-======================================== */
-
-.hero-label {
-    display: inline-block;
-
-    margin-bottom: 20px;
-
-    color: var(--color-coral);
+    color: #FF5B69;
 
     font-size: 13px;
-    font-weight: 800;
-
-    letter-spacing: 3px;
-}
-
-
-/* ========================================
-   HERO TITLE
-======================================== */
-
-.hero h1 {
-    margin-bottom: 24px;
-
-    color: var(--color-navy);
-
-    font-size: 56px;
-    line-height: 1.08;
-    font-weight: 800;
-}
-
-
-/* ========================================
-   HERO DESCRIPTION
-======================================== */
-
-.hero-description {
-    max-width: 650px;
-
-    margin: 0 auto 35px;
-
-    color: var(--color-text-muted);
-
-    font-size: 18px;
-    line-height: 1.7;
-}
-
-
-/* ========================================
-   HERO BUTTONS
-======================================== */
-
-.hero-buttons {
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    gap: 15px;
-}
-
-
-/* ========================================
-   WELCOME SECTION
-======================================== */
-
-.welcome-section {
-    padding: 0 24px 70px;
-}
-
-
-.welcome-card {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 30px;
-
-    padding: 30px 34px;
-
-    background: var(--color-white);
-
-    border: 1px solid var(--color-border);
-
-    border-radius: var(--radius-lg);
-
-    box-shadow: var(--shadow-sm);
-}
-
-
-.welcome-label {
-    display: block;
-
-    margin-bottom: 7px;
-
-    color: var(--color-coral);
-
-    font-size: 12px;
-    font-weight: 800;
-
-    letter-spacing: 1.5px;
-}
-
-
-.welcome-card h2 {
-    margin-bottom: 5px;
-
-    color: var(--color-navy);
-
-    font-size: 26px;
-}
-
-
-.welcome-card p {
-    color: var(--color-text-muted);
-}
-
-
-/* ========================================
-   FEATURES SECTION
-======================================== */
-
-.features-section {
-    padding: 80px 24px;
-
-    background: var(--color-white);
-
-    border-top: 1px solid var(--color-border);
-}
-
-
-/* ========================================
-   SECTION HEADER
-======================================== */
-
-.section-header {
-    max-width: 700px;
-
-    margin: 0 auto 45px;
-
-    text-align: center;
-}
-
-
-.section-label {
-    display: inline-block;
-
-    margin-bottom: 12px;
-
-    color: var(--color-coral);
-
-    font-size: 12px;
     font-weight: 800;
 
     letter-spacing: 2px;
 }
 
+.home-hero h1 {
+    margin: 0;
 
-.section-header h2 {
-    margin-bottom: 12px;
+    color: #203873;
 
-    color: var(--color-navy);
+    font-size: clamp(46px, 5vw, 70px);
+
+    line-height: 1.04;
+
+    letter-spacing: -2px;
+}
+
+.home-hero-text {
+    max-width: 560px;
+
+    margin: 25px 0 0;
+
+    color: #56647D;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+/* HERO IMAGE */
+
+.home-hero-visual {
+    width: 100%;
+    height: 390px;
+}
+
+.event-image-wrapper {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 22px 50px rgba(31, 55, 105, 0.16);
+}
+
+.event-hero-image {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transform: scale(1.08);
+
+    transition: transform 0.4s ease;
+}
+
+.event-image-wrapper:hover .event-hero-image {
+    transform: scale(1.11);
+}
+
+/* ROLE SECTION */
+
+.home-role-section {
+    width: min(1100px, calc(100% - 48px));
+
+    margin: 0 auto;
+
+    padding: 10px 0 85px;
+}
+
+.home-role-heading {
+    margin-bottom: 38px;
+
+    text-align: center;
+}
+
+.home-role-heading p {
+    margin: 0 0 10px;
+
+    color: #FF5B69;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.home-role-heading h2 {
+    margin: 0;
+
+    color: #203873;
 
     font-size: 34px;
-    line-height: 1.2;
 }
 
+.home-role-heading span {
+    display: block;
 
-.section-header p {
-    color: var(--color-text-muted);
+    margin-top: 10px;
 
-    font-size: 16px;
+    color: #56647D;
+
+    font-size: 15px;
 }
 
+/* ROLE CARDS */
 
-/* ========================================
-   FEATURE GRID
-======================================== */
-
-.feature-grid {
+.home-role-cards {
     display: grid;
 
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
-    gap: 24px;
+    gap: 30px;
 }
 
+.home-role-card {
+    padding: 38px;
 
-/* ========================================
-   FEATURE CARD
-======================================== */
+    border: 1px solid #DCD7E8;
 
-.feature-card {
-    padding: 30px;
+    border-radius: 18px;
 
-    background: var(--color-background);
+    background: #FFFFFF;
 
-    border: 1px solid var(--color-border);
-
-    border-radius: var(--radius-lg);
+    box-shadow:
+        0 8px 28px rgba(24, 45, 97, 0.06);
 
     transition:
-        transform var(--transition-normal),
-        box-shadow var(--transition-normal),
-        border-color var(--transition-normal);
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
+.home-role-card:hover {
+    transform: translateY(-5px);
 
-.feature-card:hover {
-    transform: translateY(-4px);
+    border-color: #FF5B69;
 
-    border-color: rgba(249, 96, 107, 0.35);
-
-    box-shadow: var(--shadow-md);
+    box-shadow:
+        0 16px 35px rgba(24, 45, 97, 0.1);
 }
 
+/* ROLE ICON */
 
-/* ========================================
-   FEATURE ICON
-======================================== */
-
-.feature-icon {
-    width: 46px;
-    height: 46px;
+.role-icon {
+    width: 58px;
+    height: 58px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 20px;
+    border-radius: 14px;
 
-    border-radius: var(--radius-md);
+    background: #FFF0F2;
 
-    background: rgba(249, 96, 107, 0.1);
+    font-size: 28px;
+}
 
-    color: var(--color-coral);
+.role-label {
+    margin: 25px 0 8px;
 
-    font-size: 13px;
+    color: #FF5B69;
+
+    font-size: 11px;
+
     font-weight: 800;
+
+    letter-spacing: 1.5px;
 }
 
+.home-role-card h3 {
+    margin: 0;
 
-/* ========================================
-   FEATURE CONTENT
-======================================== */
+    color: #203873;
 
-.feature-card h3 {
-    margin-bottom: 10px;
-
-    color: var(--color-navy);
-
-    font-size: 20px;
+    font-size: 28px;
 }
 
+.role-description {
+    min-height: 75px;
 
-.feature-card p {
-    color: var(--color-text-muted);
+    margin: 15px 0 28px;
 
-    line-height: 1.6;
+    color: #5F6C84;
+
+    font-size: 15px;
+
+    line-height: 1.7;
 }
 
+/* ROLE BUTTONS */
 
-/* ========================================
-   RESPONSIVE
-======================================== */
+.role-actions {
+    display: flex;
 
-@media (max-width: 768px) {
+    gap: 12px;
+}
 
-    .hero {
-        min-height: 500px;
+.role-login-button,
+.role-register-button {
+    min-width: 115px;
 
-        padding: 60px 20px;
+    height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 22px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.role-login-button {
+    background: #203873;
+
+    color: #FFFFFF;
+
+    border: 1px solid #203873;
+}
+
+.role-register-button {
+    background: #FFFFFF;
+
+    color: #203873;
+
+    border: 1px solid #CFD6E4;
+}
+
+.role-login-button:hover,
+.role-register-button:hover {
+    transform: translateY(-1px);
+}
+
+.role-login-button:hover {
+    background: #172D61;
+}
+
+.role-register-button:hover {
+    color: #FF5B69;
+
+    border-color: #FF5B69;
+}
+
+/* BOTTOM MESSAGE */
+
+.home-bottom-message {
+    padding: 65px 24px 80px;
+
+    text-align: center;
+
+    background: #DDD7EA;
+
+    border-top: 1px solid #D0C9DF;
+}
+
+.home-bottom-message p {
+    margin: 0 0 12px;
+
+    color: #9B5968;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+.home-bottom-message h2 {
+    margin: 0;
+
+    color: #29304A;
+
+    font-size: 30px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .home-hero {
+        grid-template-columns: 1fr;
+
+        gap: 40px;
+
+        padding-top: 55px;
     }
 
+    .home-hero-content {
+        max-width: 700px;
 
-    .hero h1 {
-        font-size: 42px;
+        margin: 0 auto;
+
+        text-align: center;
     }
 
-
-    .hero-description {
-        font-size: 16px;
+    .home-hero-text {
+        margin-left: auto;
+        margin-right: auto;
     }
 
-
-    .welcome-card {
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-
-    .feature-grid {
+    .home-role-cards {
         grid-template-columns: 1fr;
     }
-
-
-    .section-header h2 {
-        font-size: 28px;
-    }
-
 }
 
+@media (max-width: 600px) {
 
-@media (max-width: 480px) {
-
-    .hero {
-        padding: 50px 16px;
+    .home-hero,
+    .home-role-section {
+        width: min(100% - 30px, 550px);
     }
 
-
-    .hero h1 {
-        font-size: 34px;
+    .home-hero {
+        padding: 40px 0 55px;
     }
 
+    .home-hero h1 {
+        font-size: 43px;
+    }
 
-    .hero-buttons {
+    .home-hero-visual {
+        height: 300px;
+    }
+
+    .event-image-wrapper {
+        border-radius: 18px;
+    }
+
+    .home-role-card {
+        padding: 28px 24px;
+    }
+
+    .role-actions {
         flex-direction: column;
+    }
 
+    .role-login-button,
+    .role-register-button {
         width: 100%;
     }
-
-
-    .hero-buttons a {
-        width: 100%;
-    }
-
-
-    .welcome-section,
-    .features-section {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
 }

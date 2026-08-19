@@ -1,188 +1,126 @@
 .seat-selection-card {
     width: 100%;
-
     padding: 30px 34px 28px;
-
     border: 1px solid #eceef2;
-
     border-radius: 15px;
-
     background: #ffffff;
-
-    box-shadow:
-        0 5px 18px rgba(31, 45, 85, 0.06);
+    box-shadow: 0 5px 18px rgba(31, 45, 85, 0.06);
 }
 
 .seat-selection-label {
     margin: 0 0 10px;
-
     color: #f05262;
-
     font-size: 12px;
-
     font-weight: 750;
-
     letter-spacing: 1.2px;
 }
 
 .seat-selection-card h2 {
     margin: 0 0 20px;
-
     color: #20346f;
-
     font-size: 26px;
-
     line-height: 1.2;
 }
 
 .seat-screen {
     width: 100%;
-
     height: 40px;
-
     margin-bottom: 27px;
-
     border-radius: 8px;
-
     background: #20346f;
-
     color: #ffffff;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     font-size: 12px;
-
     font-weight: 750;
-
     letter-spacing: 1.4px;
 }
 
 .seat-legend {
     display: flex;
-
     justify-content: center;
-
     align-items: center;
-
     gap: 40px;
-
     margin-bottom: 27px;
 }
 
 .seat-legend > div {
     display: flex;
-
     align-items: center;
-
     gap: 8px;
-
     color: #52627e;
-
     font-size: 13px;
 }
 
 .legend-box {
     width: 17px;
-
     height: 17px;
-
     border-radius: 5px;
-
     display: inline-block;
 }
 
 .legend-box.available {
     background: #e7f8ed;
-
     border: 1px solid #62ca82;
 }
 
 .legend-box.selected {
     background: #f05262;
-
     border: 1px solid #f05262;
 }
 
 .legend-box.booked {
     background: #e4e5e7;
-
     border: 1px solid #b7bbc0;
 }
 
 .seat-map-wrapper {
     width: 100%;
-
     overflow-x: auto;
-
     padding-bottom: 6px;
 }
 
 .seat-map {
     min-width: 850px;
-
     width: 100%;
-
     display: flex;
-
     flex-direction: column;
-
     gap: 10px;
 }
 
 .seat-column-numbers,
 .seat-row {
     display: grid;
-
     column-gap: 8px;
-
     align-items: center;
 }
 
 .seat-column-numbers {
     margin-bottom: 3px;
-
     color: #20346f;
-
     font-size: 12px;
-
     font-weight: 700;
-
     text-align: center;
 }
 
 .seat-row-label {
     color: #20346f;
-
     font-size: 12px;
-
     font-weight: 700;
-
     text-align: center;
 }
 
 .seat {
     width: 100%;
-
     min-width: 32px;
-
     height: 32px;
-
     padding: 0;
-
     border-radius: 6px;
-
     font-family: inherit;
-
     font-size: 10px;
-
     font-weight: 650;
-
     cursor: pointer;
-
     transition:
         transform 0.15s ease,
         background 0.15s ease;
@@ -194,9 +132,7 @@
 
 .seat-available {
     border: 1px solid #62ca82;
-
     background: #f8fffa;
-
     color: #20346f;
 }
 
@@ -206,115 +142,78 @@
 
 .seat-selected {
     border: 1px solid #f05262;
-
     background: #f05262;
-
     color: #ffffff;
 }
 
 .seat-booked {
     border: 1px solid #b9bdc2;
-
     background: #e4e5e7;
-
     color: #858b92;
-
     cursor: not-allowed;
 }
 
 .booking-summary {
     margin-top: 24px;
-
     padding-top: 21px;
-
     border-top: 1px solid #e7e9ee;
-
     display: grid;
-
     grid-template-columns: 1fr auto;
-
     gap: 20px;
 }
 
 .selected-seat-summary {
     display: flex;
-
     flex-direction: column;
-
     gap: 9px;
 }
 
 .selected-seat-summary span {
     color: #52627e;
-
     font-size: 14px;
 }
 
 .selected-seat-summary strong {
     color: #f05262;
-
     font-size: 17px;
-
     font-weight: 700;
-
     word-break: break-word;
 }
 
 .total-summary {
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-end;
-
     gap: 9px;
 }
 
 .total-summary span {
     color: #52627e;
-
     font-size: 14px;
 }
 
 .total-summary strong {
     color: #f05262;
-
     font-size: 21px;
-
     font-weight: 750;
 }
 
 .proceed-payment-button {
     width: 100%;
-
     height: 50px;
-
     margin-top: 22px;
-
     border: none;
-
     border-radius: 7px;
-
     background: #f05262;
-
     color: #ffffff;
-
     font-family: inherit;
-
     font-size: 15px;
-
     font-weight: 700;
-
     cursor: pointer;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 18px;
-
     transition:
         background 0.2s ease,
         transform 0.15s ease;
@@ -322,20 +221,24 @@
 
 .payment-arrow {
     font-size: 25px;
-
     line-height: 1;
 }
 
 .proceed-payment-button:hover:not(:disabled) {
     background: #e64556;
-
     transform: translateY(-1px);
 }
 
 .proceed-payment-button:disabled {
     background: #f4a1aa;
-
     cursor: not-allowed;
+}
+
+.seat-empty {
+    width: 100%;
+    min-width: 32px;
+    height: 42px;
+    visibility: hidden;
 }
 
 @media (max-width: 700px) {
@@ -363,20 +266,11 @@
 @media (max-width: 450px) {
     .seat-legend {
         justify-content: flex-start;
-
         gap: 12px;
-
         flex-wrap: wrap;
     }
 
     .seat-legend > div {
         font-size: 11px;
     }
-}
-
-.seat-empty {
-    width: 100%;
-    min-width: 32px;
-    height: 42px;
-    visibility: hidden;
 }

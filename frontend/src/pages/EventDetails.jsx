@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
     getEventById,
-    getEventSeats
+    getEventSeats,
+    lockSeats
 } from "../services/eventService";
 
 import "../styles/eventDetails.css";
@@ -17,6 +18,7 @@ function EventDetails() {
     const [seats, setSeats] = useState([]);
     const [selectedSeats, setSelectedSeats] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [lockingSeats, setLockingSeats] = useState(false);
     const [error, setError] = useState("");
 
     useEffect(() => {
@@ -26,7 +28,6 @@ function EventDetails() {
                 setError("");
 
                 const eventData = await getEventById(id);
-
                 setEvent(eventData);
 
                 const seatData = await getEventSeats(id);
@@ -36,7 +37,6 @@ function EventDetails() {
                         ? seatData
                         : []
                 );
-
             } catch (error) {
                 setError(
                     error.message ||
@@ -56,7 +56,6 @@ function EventDetails() {
         }
 
         setSelectedSeats((currentSeats) => {
-
             const alreadySelected =
                 currentSeats.some(
                     (selectedSeat) =>
@@ -65,7 +64,6 @@ function EventDetails() {
                 );
 
             if (alreadySelected) {
-
                 return currentSeats.filter(
                     (selectedSeat) =>
                         selectedSeat.seatNumber !==
@@ -80,6 +78,64 @@ function EventDetails() {
         });
     };
 
+    const handleProceedToPayment = async () => {
+        if (selectedSeats.length === 0) {
+            return;
+        }
+
+        try {
+            setLockingSeats(true);
+            setError("");
+
+            const seatNumbers =
+                selectedSeats.map(
+                    (seat) => seat.seatNumber
+                );
+
+            await lockSeats(
+                id,
+                seatNumbers
+            );
+
+            const updatedSeats =
+                await getEventSeats(id);
+
+            setSeats(
+                Array.isArray(updatedSeats)
+                    ? updatedSeats
+                    : []
+            );
+
+            setSelectedSeats([]);
+
+            alert(
+                `Seats ${seatNumbers.join(", ")} locked successfully.`
+            );
+        } catch (error) {
+            setError(
+                error.message ||
+                "Unable to lock selected seats."
+            );
+
+            try {
+                const seatData =
+                    await getEventSeats(id);
+
+                setSeats(
+                    Array.isArray(seatData)
+                        ? seatData
+                        : []
+                );
+            } catch {
+                setSeats([]);
+            }
+
+            setSelectedSeats([]);
+        } finally {
+            setLockingSeats(false);
+        }
+    };
+
     const totalAmount =
         selectedSeats.reduce(
             (total, seat) =>
@@ -89,7 +145,6 @@ function EventDetails() {
 
     const groupedSeats = seats.reduce(
         (rows, seat) => {
-
             const seatNumber =
                 String(seat.seatNumber || "");
 
@@ -109,7 +164,6 @@ function EventDetails() {
             rows[row].push(seat);
 
             return rows;
-
         },
         {}
     );
@@ -118,7 +172,6 @@ function EventDetails() {
         (rowSeats) => {
             rowSeats.sort(
                 (a, b) => {
-
                     const numberA =
                         parseInt(
                             String(a.seatNumber)
@@ -141,7 +194,6 @@ function EventDetails() {
 
     const rows = Object.keys(groupedSeats).sort(
         (a, b) => {
-
             if (a.length !== b.length) {
                 return a.length - b.length;
             }
@@ -182,11 +234,9 @@ function EventDetails() {
 
     return (
         <main className="event-details-page">
-
             <div className="event-details-container">
 
                 <section className="event-hero">
-
                     <div className="event-category">
                         {event.category}
                     </div>
@@ -199,12 +249,9 @@ function EventDetails() {
                         <span>📍</span>
                         {event.location}
                     </p>
-
                 </section>
 
-
                 <section className="event-info-card">
-
                     <h2>
                         About This Event
                     </h2>
@@ -212,12 +259,9 @@ function EventDetails() {
                     <p className="event-description">
                         {event.description}
                     </p>
-
                 </section>
 
-
                 <section className="event-info-card">
-
                     <h2>
                         Event Information
                     </h2>
@@ -225,122 +269,91 @@ function EventDetails() {
                     <div className="event-information-grid">
 
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 📅
                             </span>
 
                             <div>
-                                <span>
-                                    Date
-                                </span>
+                                <span>Date</span>
 
                                 <strong>
                                     {event.date}
                                 </strong>
                             </div>
-
                         </div>
 
-
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 🕐
                             </span>
 
                             <div>
-                                <span>
-                                    Time
-                                </span>
+                                <span>Time</span>
 
                                 <strong>
                                     {event.time}
                                 </strong>
                             </div>
-
                         </div>
 
-
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 📍
                             </span>
 
                             <div>
-                                <span>
-                                    Location
-                                </span>
+                                <span>Location</span>
 
                                 <strong>
                                     {event.location}
                                 </strong>
                             </div>
-
                         </div>
 
-
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 🎟
                             </span>
 
                             <div>
-                                <span>
-                                    Ticket Price
-                                </span>
+                                <span>Ticket Price</span>
 
                                 <strong>
                                     ₹{event.price}
                                 </strong>
                             </div>
-
                         </div>
 
-
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 💺
                             </span>
 
                             <div>
-                                <span>
-                                    Total Seats
-                                </span>
+                                <span>Total Seats</span>
 
                                 <strong>
                                     {event.totalSeats}
                                 </strong>
                             </div>
-
                         </div>
 
-
                         <div className="event-information-item">
-
                             <span className="event-information-icon">
                                 💺
                             </span>
 
                             <div>
-                                <span>
-                                    Available Seats
-                                </span>
+                                <span>Available Seats</span>
 
                                 <strong>
                                     {event.availableSeats}
                                 </strong>
                             </div>
-
                         </div>
 
                     </div>
-
                 </section>
-
 
                 <section className="seat-selection-card">
 
@@ -352,37 +365,28 @@ function EventDetails() {
                         Choose Your Seats
                     </h2>
 
-
                     <div className="seat-screen">
                         STAGE
                     </div>
-
 
                     <div className="seat-legend">
 
                         <div>
                             <span className="legend-box available"></span>
-                            <span>
-                                Available
-                            </span>
+                            <span>Available</span>
                         </div>
 
                         <div>
                             <span className="legend-box selected"></span>
-                            <span>
-                                Selected
-                            </span>
+                            <span>Selected</span>
                         </div>
 
                         <div>
                             <span className="legend-box booked"></span>
-                            <span>
-                                Booked
-                            </span>
+                            <span>Booked</span>
                         </div>
 
                     </div>
-
 
                     {seats.length === 0 ? (
 
@@ -411,16 +415,13 @@ function EventDetails() {
                                             length: SEATS_PER_ROW
                                         },
                                         (_, index) => (
-                                            <span
-                                                key={index}
-                                            >
+                                            <span key={index}>
                                                 {index + 1}
                                             </span>
                                         )
                                     )}
 
                                 </div>
-
 
                                 {rows.map((row) => {
 
@@ -440,7 +441,6 @@ function EventDetails() {
                                         );
 
                                     return (
-
                                         <div
                                             className="seat-row"
                                             key={row}
@@ -453,7 +453,6 @@ function EventDetails() {
                                             <span className="seat-row-label">
                                                 {row}
                                             </span>
-
 
                                             {Array.from(
                                                 {
@@ -471,7 +470,6 @@ function EventDetails() {
                                                         );
 
                                                     if (!seat) {
-
                                                         return (
                                                             <span
                                                                 key={
@@ -482,65 +480,37 @@ function EventDetails() {
                                                         );
                                                     }
 
-
                                                     const selected =
                                                         selectedSeats.some(
-                                                            (
-                                                                selectedSeat
-                                                            ) =>
+                                                            (selectedSeat) =>
                                                                 selectedSeat.seatNumber ===
                                                                 seat.seatNumber
                                                         );
 
-
-                                                    const isBooked =
-                                                        seat.status ===
-                                                        "BOOKED";
-
-
-                                                    const isLocked =
-                                                        seat.status ===
-                                                        "LOCKED";
-
-
-                                                    let seatClass =
-                                                        "seat seat-available";
-
-
-                                                    if (selected) {
-
-                                                        seatClass =
-                                                            "seat seat-selected";
-
-                                                    } else if (
-                                                        isBooked
+                                                    if (
+                                                        seat.status === "LOCKED" ||
+                                                        seat.status === "BOOKED"
                                                     ) {
-
-                                                        seatClass =
-                                                            "seat seat-booked";
-
-                                                    } else if (
-                                                        isLocked
-                                                    ) {
-
-                                                        seatClass =
-                                                            "seat seat-locked";
+                                                        return (
+                                                            <span
+                                                                key={
+                                                                    seat.seatNumber
+                                                                }
+                                                                className="seat-empty"
+                                                            />
+                                                        );
                                                     }
 
-
                                                     return (
-
                                                         <button
                                                             key={
                                                                 seat.seatNumber
                                                             }
                                                             type="button"
                                                             className={
-                                                                seatClass
-                                                            }
-                                                            disabled={
-                                                                isBooked ||
-                                                                isLocked
+                                                                selected
+                                                                    ? "seat seat-selected"
+                                                                    : "seat seat-available"
                                                             }
                                                             onClick={() =>
                                                                 handleSeatClick(
@@ -548,11 +518,8 @@ function EventDetails() {
                                                                 )
                                                             }
                                                         >
-                                                            {
-                                                                seat.seatNumber
-                                                            }
+                                                            {seat.seatNumber}
                                                         </button>
-
                                                     );
                                                 }
                                             )}
@@ -566,11 +533,15 @@ function EventDetails() {
                         </div>
                     )}
 
+                    {error && (
+                        <div className="event-details-status event-details-error">
+                            {error}
+                        </div>
+                    )}
 
                     <div className="booking-summary">
 
                         <div className="selected-seat-summary">
-
                             <span>
                                 Selected Seats (
                                 {selectedSeats.length}
@@ -578,7 +549,6 @@ function EventDetails() {
                             </span>
 
                             <strong>
-
                                 {selectedSeats.length === 0
                                     ? "None"
                                     : selectedSeats
@@ -587,14 +557,10 @@ function EventDetails() {
                                                 seat.seatNumber
                                         )
                                         .join(", ")}
-
                             </strong>
-
                         </div>
 
-
                         <div className="total-summary">
-
                             <span>
                                 Total
                             </span>
@@ -605,21 +571,23 @@ function EventDetails() {
                                     "en-IN"
                                 )}
                             </strong>
-
                         </div>
 
                     </div>
-
 
                     <button
                         type="button"
                         className="proceed-payment-button"
                         disabled={
-                            selectedSeats.length === 0
+                            selectedSeats.length === 0 ||
+                            lockingSeats
                         }
+                        onClick={handleProceedToPayment}
                     >
                         <span>
-                            Proceed to Payment
+                            {lockingSeats
+                                ? "Locking Seats..."
+                                : "Proceed to Payment"}
                         </span>
 
                         <span className="payment-arrow">
@@ -629,13 +597,11 @@ function EventDetails() {
 
                 </section>
 
-
                 <footer className="event-details-footer">
                     © 2026 Eventis. All rights reserved.
                 </footer>
 
             </div>
-
         </main>
     );
 }

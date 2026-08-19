@@ -1,16 +1,12 @@
 :root {
-    /* ========================================
-       EVENTIS COLOR PALETTE
-    ======================================== */
-
-    --color-background: #FAFAFA;
+    --color-background: #EAE7F2;
     --color-navy: #1F2A5E;
     --color-white: #FFFFFF;
 
     --color-coral: #F9606B;
     --color-gold: #F9C74F;
 
-    --color-border: #E7E7EA;
+    --color-border: #E1DDEA;
 
     --color-text: #1F2937;
     --color-text-muted: #6B7280;
@@ -18,11 +14,6 @@
     --color-success: #22C55E;
     --color-error: #EF4444;
     --color-warning: #F59E0B;
-
-
-    /* ========================================
-       EVENTIS TYPOGRAPHY
-    ======================================== */
 
     --font-family: Calibri, Arial, sans-serif;
 
@@ -34,11 +25,6 @@
     --font-size-2xl: 28px;
     --font-size-3xl: 38px;
 
-
-    /* ========================================
-       EVENTIS SPACING
-    ======================================== */
-
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
@@ -47,36 +33,17 @@
     --space-2xl: 48px;
     --space-3xl: 64px;
 
-
-    /* ========================================
-       EVENTIS BORDER RADIUS
-    ======================================== */
-
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-xl: 20px;
     --radius-pill: 999px;
 
-
-    /* ========================================
-       EVENTIS SHADOWS
-    ======================================== */
-
     --shadow-sm: 0 2px 8px rgba(31, 42, 94, 0.06);
-
     --shadow-md: 0 6px 20px rgba(31, 42, 94, 0.08);
-
     --shadow-lg: 0 12px 35px rgba(31, 42, 94, 0.12);
 
-
-    /* ========================================
-       EVENTIS TRANSITIONS
-    ======================================== */
-
     --transition-fast: 0.15s ease;
-
     --transition-normal: 0.25s ease;
-
     --transition-slow: 0.35s ease;
 }

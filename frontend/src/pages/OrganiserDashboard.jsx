@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { getMyEvents, deleteEvent } from "../services/eventService";
+import {
+    getMyEvents,
+    deleteEvent
+} from "../services/eventService";
 import "../styles/organiser-dashboard.css";
 
 function OrganiserDashboard() {
@@ -19,9 +22,16 @@ function OrganiserDashboard() {
 
             const data = await getMyEvents();
 
-            setEvents(data);
+            setEvents(
+                Array.isArray(data)
+                    ? data
+                    : []
+            );
         } catch (error) {
-            setError(error.message);
+            setError(
+                error.message ||
+                "Unable to load your events."
+            );
         } finally {
             setLoading(false);
         }
@@ -51,11 +61,26 @@ function OrganiserDashboard() {
                 )
             );
         } catch (error) {
-            setError(error.message);
+            setError(
+                error.message ||
+                "Unable to delete event."
+            );
         } finally {
             setDeleteLoading(null);
         }
     };
+
+    const totalSeats = events.reduce(
+        (total, event) =>
+            total + Number(event.totalSeats || 0),
+        0
+    );
+
+    const availableSeats = events.reduce(
+        (total, event) =>
+            total + Number(event.availableSeats || 0),
+        0
+    );
 
     return (
         <main className="organiser-dashboard">
@@ -89,29 +114,32 @@ function OrganiserDashboard() {
             <section className="dashboard-stats">
 
                 <div className="dashboard-stat-card">
-                    <span>Total Events</span>
-                    <strong>{events.length}</strong>
-                </div>
+                    <span>
+                        Total Events
+                    </span>
 
-                <div className="dashboard-stat-card">
-                    <span>Total Seats</span>
                     <strong>
-                        {events.reduce(
-                            (total, event) =>
-                                total + event.totalSeats,
-                            0
-                        )}
+                        {events.length}
                     </strong>
                 </div>
 
                 <div className="dashboard-stat-card">
-                    <span>Available Seats</span>
+                    <span>
+                        Total Seats
+                    </span>
+
                     <strong>
-                        {events.reduce(
-                            (total, event) =>
-                                total + event.availableSeats,
-                            0
-                        )}
+                        {totalSeats}
+                    </strong>
+                </div>
+
+                <div className="dashboard-stat-card">
+                    <span>
+                        Available Seats
+                    </span>
+
+                    <strong>
+                        {availableSeats}
                     </strong>
                 </div>
 
@@ -120,6 +148,7 @@ function OrganiserDashboard() {
             <section className="organiser-events-section">
 
                 <div className="section-header">
+
                     <div>
                         <p className="dashboard-label">
                             YOUR EVENTS
@@ -136,6 +165,7 @@ function OrganiserDashboard() {
                     >
                         + Create Event
                     </Link>
+
                 </div>
 
                 {loading && (
@@ -196,7 +226,8 @@ function OrganiserDashboard() {
                                         </h3>
 
                                         <p>
-                                            {event.date} · {event.time}
+                                            {event.date} ·{" "}
+                                            {event.time}
                                         </p>
 
                                         <p>
@@ -210,7 +241,8 @@ function OrganiserDashboard() {
                                         <span>
                                             {event.availableSeats}
                                             {" "}
-                                            /{" "}
+                                            /
+                                            {" "}
                                             {event.totalSeats}
                                             {" "}
                                             seats available
@@ -221,7 +253,7 @@ function OrganiserDashboard() {
                                     <div className="organiser-event-actions">
 
                                         <Link
-                                            to={`/events/${event.id}`}
+                                            to={`/organiser/events/${event.id}`}
                                             className="event-action-view"
                                         >
                                             View
@@ -238,13 +270,17 @@ function OrganiserDashboard() {
                                             type="button"
                                             className="event-action-delete"
                                             disabled={
-                                                deleteLoading === event.id
+                                                deleteLoading ===
+                                                event.id
                                             }
                                             onClick={() =>
-                                                handleDelete(event.id)
+                                                handleDelete(
+                                                    event.id
+                                                )
                                             }
                                         >
-                                            {deleteLoading === event.id
+                                            {deleteLoading ===
+                                            event.id
                                                 ? "Deleting..."
                                                 : "Delete"}
                                         </button>

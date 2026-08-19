@@ -14,7 +14,6 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
 
     const { login } = useAuth();
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -31,7 +30,7 @@ function Login() {
         setError("");
 
         try {
-            await login(formData);
+            const loggedInUser = await login(formData);
 
             setMessage("Login successful!");
 
@@ -40,9 +39,17 @@ function Login() {
                 password: ""
             });
 
-            setTimeout(() => {
-                navigate("/");
-            }, 700);
+            if (loggedInUser.role === "ORGANISER") {
+                navigate("/organiser/dashboard");
+                return;
+            }
+
+            if (loggedInUser.role === "ATTENDEE") {
+                navigate("/attendee/dashboard");
+                return;
+            }
+
+            setError("Unknown user role.");
 
         } catch (error) {
             setError(error.message);
@@ -120,7 +127,9 @@ function Login() {
                                     setShowPassword(!showPassword)
                                 }
                             >
-                                {showPassword ? "Hide" : "Show"}
+                                {showPassword
+                                    ? "Hide"
+                                    : "Show"}
                             </button>
 
                         </div>

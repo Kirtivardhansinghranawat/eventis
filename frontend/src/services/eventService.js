@@ -101,3 +101,18 @@ export const getMyEvents = async () => {
 
     return handleResponse(response);
 };
+
+export const lockSeats = async (eventId, seatNumbers) => {
+    const response = await fetch(
+        `${API_URL}/${eventId}/seats/lock`,
+        {
+            method: "POST",
+            headers: getAuthHeaders(),
+            body: JSON.stringify({
+                seatNumbers
+            })
+        }
+    );
+
+    return handleResponse(response);
+};

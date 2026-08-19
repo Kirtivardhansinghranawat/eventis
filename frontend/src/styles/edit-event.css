@@ -1,7 +1,7 @@
 .edit-event-page {
     min-height: calc(100vh - 140px);
     padding: 55px 24px 80px;
-    background: var(--color-background);
+    background: #EAE7F2;
 }
 
 .edit-event-header {
@@ -203,7 +203,7 @@
 }
 
 .edit-event-cancel:hover {
-    background: var(--color-background);
+    background: #EAE7F2;
     transform: translateY(-1px);
 }
 
@@ -238,9 +238,37 @@
     text-align: center;
 }
 
+.edit-seat-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.edit-seat-stat {
+    padding: 18px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--surface-color);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.edit-seat-stat-label {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.edit-seat-stat strong {
+    font-size: 24px;
+    color: var(--text-primary);
+}
+
 @media (max-width: 700px) {
     .edit-event-page {
         padding: 40px 16px 60px;
+        background: #EAE7F2;
     }
 
     .edit-event-header h1 {
@@ -263,5 +291,9 @@
     .edit-event-cancel,
     .edit-event-submit {
         width: 100%;
+    }
+
+    .edit-seat-stats {
+        grid-template-columns: 1fr;
     }
 }

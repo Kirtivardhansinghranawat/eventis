@@ -1,211 +1,161 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import eventHeroImage from "../assets/event-hero.png";
 import "../styles/home.css";
 
 function Home() {
-    const { user, isAuthenticated } = useAuth();
-
     return (
         <main className="home-page">
 
-            {}
+            <section className="home-hero">
 
-            <section className="hero">
+                <div className="home-hero-content">
 
-                <div className="hero-content">
-
-                    <span className="hero-label">
-                        EVENTIS
-                    </span>
-
-                    <h1>
-                        Discover events.
-                        <br />
-                        Create experiences.
-                    </h1>
-
-                    <p className="hero-description">
-                        Find exciting events, discover new experiences,
-                        and make every moment count with Eventis.
+                    <p className="home-eyebrow">
+                        DISCOVER · CREATE · EXPERIENCE
                     </p>
 
-                    <div className="hero-buttons">
+                    <h1>
+                        Your Event.
+                        <br />
+                        Your Experience.
+                    </h1>
 
-                        <Link
-                            to="/events"
-                            className="btn-primary"
-                        >
-                            Explore Events
-                        </Link>
+                    <p className="home-hero-text">
+                        Discover exciting events, explore available
+                        seats, choose your perfect spot and book
+                        unforgettable experiences. Or create your own
+                        event and bring people together.
+                    </p>
 
-                        {!isAuthenticated && (
-                            <Link
-                                to="/register"
-                                className="btn-secondary"
-                            >
-                                Create Account
-                            </Link>
-                        )}
+                </div>
 
-                        {isAuthenticated &&
-                            user?.role === "ORGANISER" && (
-                                <Link
-                                    to="/organiser/dashboard"
-                                    className="btn-secondary"
-                                >
-                                    Organiser Dashboard
-                                </Link>
-                            )}
+                <div className="home-hero-visual">
 
+                    <div className="event-image-wrapper">
+                        <img
+                            src={eventHeroImage}
+                            alt="People enjoying an event"
+                            className="event-hero-image"
+                        />
                     </div>
 
                 </div>
 
             </section>
 
+            <section className="home-role-section">
 
-            {/* ========================================
-                WELCOME SECTION
-            ======================================== */}
+                <div className="home-role-heading">
 
-            {isAuthenticated && (
-                <section className="welcome-section">
+                    <p>
+                        GET STARTED
+                    </p>
 
-                    <div className="container">
+                    <h2>
+                        How do you want to use Eventis?
+                    </h2>
 
-                        <div className="welcome-card">
-
-                            <div>
-                                <span className="welcome-label">
-                                    WELCOME BACK
-                                </span>
-
-                                <h2>
-                                    Hello, {user?.name}!
-                                </h2>
-
-                                <p>
-                                    You are logged in as{" "}
-                                    <strong>
-                                        {user?.role}
-                                    </strong>.
-                                </p>
-                            </div>
-
-                            {user?.role === "ATTENDEE" && (
-                                <Link
-                                    to="/attendee/dashboard"
-                                    className="btn-primary"
-                                >
-                                    My Dashboard
-                                </Link>
-                            )}
-
-                            {user?.role === "ORGANISER" && (
-                                <Link
-                                    to="/organiser/dashboard"
-                                    className="btn-primary"
-                                >
-                                    My Dashboard
-                                </Link>
-                            )}
-
-                        </div>
-
-                    </div>
-
-                </section>
-            )}
-
-
-            {/* ========================================
-                FEATURE SECTION
-            ======================================== */}
-
-            <section className="features-section">
-
-                <div className="container">
-
-                    <div className="section-header">
-
-                        <span className="section-label">
-                            WHY EVENTIS
-                        </span>
-
-                        <h2>
-                            Everything you need for great events
-                        </h2>
-
-                        <p>
-                            Eventis brings event discovery,
-                            booking and management together
-                            in one simple platform.
-                        </p>
-
-                    </div>
-
-
-                    <div className="feature-grid">
-
-                        {/* Feature 1 */}
-                        <div className="feature-card">
-
-                            <div className="feature-icon">
-                                01
-                            </div>
-
-                            <h3>
-                                Discover Events
-                            </h3>
-
-                            <p>
-                                Explore events and find experiences
-                                that match your interests.
-                            </p>
-
-                        </div>
-
-
-                        {/* Feature 2 */}
-                        <div className="feature-card">
-
-                            <div className="feature-icon">
-                                02
-                            </div>
-
-                            <h3>
-                                Book Your Seat
-                            </h3>
-
-                            <p>
-                                Choose your preferred seat and
-                                reserve your place with ease.
-                            </p>
-
-                        </div>
-
-
-                        {/* Feature 3 */}
-                        <div className="feature-card">
-
-                            <div className="feature-icon">
-                                03
-                            </div>
-
-                            <h3>
-                                Manage Events
-                            </h3>
-
-                            <p>
-                                Organisers can create and manage
-                                their events from one place.
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <span>
+                        Choose your role to get started.
+                    </span>
 
                 </div>
+
+                <div className="home-role-cards">
+
+                    <article className="home-role-card">
+
+                        <div className="role-icon">
+                            🎟
+                        </div>
+
+                        <p className="role-label">
+                            FOR ATTENDEES
+                        </p>
+
+                        <h3>
+                            I am an Attendee
+                        </h3>
+
+                        <p className="role-description">
+                            Discover events, explore available seats,
+                            choose your favourite spot and book your
+                            experience.
+                        </p>
+
+                        <div className="role-actions">
+
+                            <Link
+                                to="/login?role=ATTENDEE"
+                                className="role-login-button"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                to="/register?role=ATTENDEE"
+                                className="role-register-button"
+                            >
+                                Register
+                            </Link>
+
+                        </div>
+
+                    </article>
+
+                    <article className="home-role-card">
+
+                        <div className="role-icon">
+                            ✦
+                        </div>
+
+                        <p className="role-label">
+                            FOR ORGANISERS
+                        </p>
+
+                        <h3>
+                            I am an Organiser
+                        </h3>
+
+                        <p className="role-description">
+                            Create events, manage your seats and bring
+                            your audience together while giving them a
+                            great experience.
+                        </p>
+
+                        <div className="role-actions">
+
+                            <Link
+                                to="/login?role=ORGANISER"
+                                className="role-login-button"
+                            >
+                                Login
+                            </Link>
+
+                            <Link
+                                to="/register?role=ORGANISER"
+                                className="role-register-button"
+                            >
+                                Register
+                            </Link>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <section className="home-bottom-message">
+
+                <p>
+                    DISCOVER · CREATE · EXPERIENCE
+                </p>
+
+                <h2>
+                    One platform for every event.
+                </h2>
 
             </section>
 
