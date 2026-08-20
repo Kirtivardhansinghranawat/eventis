@@ -46,19 +46,10 @@ public class SecurityConfig {
 
             .authorizeHttpRequests(auth -> auth
 
-                // ========================================
-                // AUTHENTICATION
-                // ========================================
-
                 .requestMatchers(
-                    "/api/auth/register",
-                    "/api/auth/login"
+                    "/api/auth/login",
+                    "/api/auth/register"
                 ).permitAll()
-
-
-                // ========================================
-                // PUBLIC EVENT APIs
-                // ========================================
 
                 .requestMatchers(
                     HttpMethod.GET,
@@ -66,21 +57,11 @@ public class SecurityConfig {
                     "/api/events/{id}"
                 ).permitAll()
 
-
-                // ========================================
-                // PUBLIC SEAT APIs
-                // ========================================
-
                 .requestMatchers(
                     HttpMethod.GET,
                     "/api/events/*/seats",
                     "/api/events/*/seats/*"
                 ).permitAll()
-
-
-                // ========================================
-                // ORGANISER APIs
-                // ========================================
 
                 .requestMatchers(
                     HttpMethod.GET,
@@ -102,21 +83,11 @@ public class SecurityConfig {
                     "/api/events/{id}"
                 ).hasRole("ORGANISER")
 
-
-                // ========================================
-                // ATTENDEE SEAT APIs
-                // ========================================
-
                 .requestMatchers(
                     HttpMethod.POST,
                     "/api/events/*/seats/lock",
                     "/api/events/*/seats/release"
                 ).hasRole("ATTENDEE")
-
-
-                // ========================================
-                // EVERYTHING ELSE
-                // ========================================
 
                 .anyRequest().authenticated()
             )

@@ -194,6 +194,102 @@ public class SeatService {
         }
     }
 
+    public void confirmSeats(
+            String eventId,
+            List<String> seatNumbers,
+            String userId
+    ) {
+
+        if (seatNumbers == null ||
+                seatNumbers.isEmpty()) {
+
+            throw new RuntimeException(
+                    "No seats were provided"
+            );
+        }
+
+        if (userId == null ||
+                userId.isBlank()) {
+
+            throw new RuntimeException(
+                    "User authentication is required"
+            );
+        }
+
+        List<String> uniqueSeatNumbers =
+                seatNumbers.stream()
+                        .distinct()
+                        .toList();
+
+        for (String seatNumber :
+                uniqueSeatNumbers) {
+
+            Seat seat =
+                    seatRepository
+                            .findByEventIdAndSeatNumber(
+                                    eventId,
+                                    seatNumber
+                            )
+                            .orElseThrow(() ->
+                                    new RuntimeException(
+                                            "Seat "
+                                            + seatNumber
+                                            + " not found"
+                                    )
+                            );
+
+            if ("LOCKED".equals(
+                    seat.getStatus()
+            ) &&
+                    seat.getLockedUntil() != null &&
+                    seat.getLockedUntil()
+                            .isBefore(
+                                    LocalDateTime.now()
+                            )) {
+
+                seat.setStatus("AVAILABLE");
+                seat.setLockedBy(null);
+                seat.setLockedUntil(null);
+
+                seatRepository.save(seat);
+
+                throw new RuntimeException(
+                        "Seat "
+                        + seatNumber
+                        + " lock has expired"
+                );
+            }
+
+            if (!"LOCKED".equals(
+                    seat.getStatus()
+            )) {
+
+                throw new RuntimeException(
+                        "Seat "
+                        + seatNumber
+                        + " is not locked"
+                );
+            }
+
+            if (!userId.equals(
+                    seat.getLockedBy()
+            )) {
+
+                throw new RuntimeException(
+                        "Seat "
+                        + seatNumber
+                        + " is locked by another user"
+                );
+            }
+
+            seat.setStatus("BOOKED");
+            seat.setLockedBy(null);
+            seat.setLockedUntil(null);
+
+            seatRepository.save(seat);
+        }
+    }
+
     private void releaseExpiredLocks(
             List<Seat> seats
     ) {

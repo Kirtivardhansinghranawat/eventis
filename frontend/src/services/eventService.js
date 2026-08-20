@@ -1,6 +1,7 @@
 import { getToken } from "./authService";
 
 const API_URL = "http://localhost:8080/api/events";
+const BOOKING_API_URL = "http://localhost:8080/api/bookings";
 
 const getAuthHeaders = () => {
     const token = getToken();
@@ -102,7 +103,10 @@ export const getMyEvents = async () => {
     return handleResponse(response);
 };
 
-export const lockSeats = async (eventId, seatNumbers) => {
+export const lockSeats = async (
+    eventId,
+    seatNumbers
+) => {
     const response = await fetch(
         `${API_URL}/${eventId}/seats/lock`,
         {
@@ -111,6 +115,36 @@ export const lockSeats = async (eventId, seatNumbers) => {
             body: JSON.stringify({
                 seatNumbers
             })
+        }
+    );
+
+    return handleResponse(response);
+};
+
+export const createBooking = async (
+    eventId,
+    seatNumbers
+) => {
+    const response = await fetch(
+        `${BOOKING_API_URL}/create?eventId=${eventId}`,
+        {
+            method: "POST",
+            headers: getAuthHeaders(),
+            body: JSON.stringify(seatNumbers)
+        }
+    );
+
+    return handleResponse(response);
+};
+
+export const confirmBooking = async (
+    bookingId
+) => {
+    const response = await fetch(
+        `${BOOKING_API_URL}/${bookingId}/confirm`,
+        {
+            method: "POST",
+            headers: getAuthHeaders()
         }
     );
 

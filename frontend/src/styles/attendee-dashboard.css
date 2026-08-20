@@ -7,80 +7,54 @@
 .attendee-dashboard-header {
     width: min(1100px, 100%);
     margin: 0 auto 45px;
-
     padding: 42px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     gap: 30px;
-
     border-radius: 20px;
-
     background: #FFFFFF;
     border: 1px solid #DCD7E8;
-
-    box-shadow:
-        0 10px 30px rgba(32, 56, 115, 0.06);
+    box-shadow: 0 10px 30px rgba(32, 56, 115, 0.06);
 }
 
 .attendee-dashboard-label {
     margin: 0 0 10px;
-
     color: #FF5B69;
-
     font-size: 12px;
     font-weight: 800;
-
     letter-spacing: 2px;
 }
 
 .attendee-dashboard-header h1 {
     margin: 0;
-
     color: #203873;
-
     font-size: 38px;
 }
 
 .attendee-dashboard-header > div > p:last-child {
     max-width: 600px;
-
     margin: 12px 0 0;
-
     color: #56647D;
-
     font-size: 15px;
-
     line-height: 1.7;
 }
 
 .attendee-browse-button {
     min-width: 155px;
     height: 48px;
-
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 0 22px;
-
     border-radius: 8px;
-
     background: #203873;
     color: #FFFFFF;
-
     border: 1px solid #203873;
-
     font-size: 14px;
     font-weight: 700;
-
     text-decoration: none;
-
     white-space: nowrap;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -88,113 +62,76 @@
 
 .attendee-browse-button:hover {
     background: #172D61;
-
     transform: translateY(-1px);
 }
 
 .attendee-dashboard-content {
     width: min(1100px, 100%);
-
-    margin: 0 auto;
-
+    margin: 0 auto 45px;
     display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-
+    grid-template-columns: 1fr;
     gap: 30px;
 }
 
 .attendee-dashboard-card {
     padding: 34px;
-
     display: flex;
-
     gap: 24px;
-
     border-radius: 18px;
-
     background: #FFFFFF;
-
     border: 1px solid #DCD7E8;
-
-    box-shadow:
-        0 8px 28px rgba(24, 45, 97, 0.06);
+    box-shadow: 0 8px 28px rgba(24, 45, 97, 0.06);
 }
 
 .attendee-card-icon {
     flex-shrink: 0;
-
     width: 58px;
     height: 58px;
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     border-radius: 14px;
-
     background: #FFF0F2;
-
     font-size: 27px;
 }
 
 .attendee-card-label {
     margin: 0 0 8px;
-
     color: #FF5B69;
-
     font-size: 11px;
     font-weight: 800;
-
     letter-spacing: 1.5px;
 }
 
 .attendee-dashboard-card h2 {
     margin: 0;
-
     color: #203873;
-
     font-size: 24px;
 }
 
 .attendee-dashboard-card p:not(.attendee-card-label) {
     margin: 12px 0 22px;
-
     color: #5F6C84;
-
     font-size: 14px;
-
     line-height: 1.7;
 }
 
 .attendee-card-button {
     min-width: 125px;
     height: 42px;
-
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 0 18px;
-
     border-radius: 8px;
-
     background: #203873;
     color: #FFFFFF;
-
     border: 1px solid #203873;
-
     font-size: 13px;
     font-weight: 700;
-
     text-decoration: none;
-
     box-sizing: border-box;
-
     cursor: pointer;
-
     transition:
         background 0.2s ease,
         transform 0.2s ease;
@@ -202,33 +139,201 @@
 
 .attendee-card-button:hover {
     background: #172D61;
-
     transform: translateY(-1px);
 }
 
-.attendee-disabled-button {
-    background: #E4E4E8;
-
-    color: #858894;
-
-    border-color: #E4E4E8;
-
-    cursor: not-allowed;
+.attendee-bookings-section {
+    width: min(1100px, 100%);
+    margin: 0 auto;
 }
 
-.attendee-disabled-button:hover {
-    background: #E4E4E8;
+.attendee-bookings-header {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
 
-    color: #858894;
+.attendee-bookings-header h2 {
+    margin: 0;
+    color: #203873;
+    font-size: 28px;
+    font-weight: 800;
+}
 
-    transform: none;
+.attendee-bookings-link {
+    min-height: 40px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #203873;
+    border-radius: 8px;
+    background: #FFFFFF;
+    color: #203873;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.attendee-bookings-link:hover {
+    background: #203873;
+    color: #FFFFFF;
+    transform: translateY(-1px);
+}
+
+.attendee-bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.attendee-booking-card {
+    padding: 26px 28px;
+    display: grid;
+    grid-template-columns: 1.4fr 1.6fr auto;
+    align-items: center;
+    gap: 28px;
+    background: #FFFFFF;
+    border: 1px solid #DCD7E8;
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(24, 45, 97, 0.06);
+}
+
+.attendee-booking-main {
+    min-width: 0;
+}
+
+.attendee-booking-main h3 {
+    margin: 0 0 8px;
+    color: #203873;
+    font-size: 20px;
+    font-weight: 800;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.attendee-booking-main p:last-child {
+    margin: 0;
+    color: #6B7488;
+    font-size: 12px;
+}
+
+.attendee-booking-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.attendee-booking-details div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.attendee-booking-details span {
+    color: #7A8498;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.attendee-booking-details strong {
+    color: #203873;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.attendee-booking-statuses {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.booking-status,
+.payment-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 0 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.booking-status {
+    background: #FFF0F2;
+    color: #F05262;
+}
+
+.booking-status.confirmed {
+    background: #EAF8EF;
+    color: #23864B;
+}
+
+.payment-status {
+    background: #F3F4F6;
+    color: #6B7280;
+}
+
+.payment-status.success {
+    background: #EAF8EF;
+    color: #23864B;
+}
+
+.attendee-bookings-status {
+    padding: 50px 30px;
+    background: #FFFFFF;
+    border: 1px solid #DCD7E8;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(24, 45, 97, 0.06);
+}
+
+.attendee-bookings-status h3 {
+    margin: 0 0 8px;
+    color: #203873;
+    font-size: 22px;
+}
+
+.attendee-bookings-status p {
+    margin: 0 0 22px;
+    color: #5F6C84;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.attendee-bookings-error {
+    color: #D9363E;
+    background: #FFF5F5;
+    border-color: #F1C4C7;
+}
+
+@media (max-width: 900px) {
+    .attendee-booking-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .attendee-booking-statuses {
+        align-items: flex-start;
+        padding-top: 16px;
+        border-top: 1px solid #E7E4ED;
+    }
 }
 
 @media (max-width: 800px) {
-
     .attendee-dashboard-header {
         flex-direction: column;
-
         align-items: flex-start;
     }
 
@@ -236,20 +341,18 @@
         width: 100%;
     }
 
-    .attendee-dashboard-content {
-        grid-template-columns: 1fr;
+    .attendee-booking-details {
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 600px) {
-
     .attendee-dashboard {
         padding: 35px 15px 60px;
     }
 
     .attendee-dashboard-header {
         padding: 28px 24px;
-
         margin-bottom: 25px;
     }
 
@@ -259,7 +362,28 @@
 
     .attendee-dashboard-card {
         padding: 25px;
-
         flex-direction: column;
+    }
+
+    .attendee-bookings-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .attendee-bookings-link {
+        width: 100%;
+    }
+
+    .attendee-booking-card {
+        padding: 22px;
+    }
+
+    .attendee-booking-details {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .attendee-booking-statuses {
+        align-items: flex-start;
     }
 }
